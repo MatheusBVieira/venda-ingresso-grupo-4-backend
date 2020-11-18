@@ -1,0 +1,3 @@
+INSERT INTO USUARIO(nome_completo, cpf, username, password, email, telefone, idade) VALUES('Matheus Bruggemann Vieira', '01014310903',  'nofti', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'matheusbvieira@hotmail.com', '48991466677', '19');
+INSERT INTO USUARIO(nome_completo, cpf, username, password, email, telefone, idade) VALUES('Matheus Bruggemann Vieira', '01014210903',  'noft', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'matheusbvieira@gmail.com', '48991466677', '19');
+	

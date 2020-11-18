@@ -1,52 +1,30 @@
-package com.example.vendaIngressos.model;
+package com.example.vendaIngressos.controller.dto;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import org.springframework.data.domain.Page;
 
-@Entity
-@Table(name = "usuario")
-public class Usuario {
+import com.example.vendaIngressos.model.Endereco;
+import com.example.vendaIngressos.model.Usuario;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UsuarioDto {
+
 	public Long id;
 	public String nomeCompleto;
-
-	@Column(unique = true)
 	public String cpf;
-
-	@OneToOne(cascade = CascadeType.ALL)
 	public Endereco endereco;
-
-	@Column(unique = true)
 	public String username;
-	public String password;
-
-	@Column(unique = true)
 	public String email;
 	public String telefone;
 	public int idade;
 
-	public Usuario(String nomeCompleto, String cpf, Endereco endereco, String username, String password, String email,
-			String telefone, int idade) {
-		this.nomeCompleto = nomeCompleto;
-		this.cpf = cpf;
-		this.endereco = endereco;
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.telefone = telefone;
-		this.idade = idade;
-	}
-
-	public Usuario() {
-		// TODO Auto-generated constructor stub
+	public UsuarioDto(Usuario usuario) {
+		this.id = usuario.getId();
+		this.nomeCompleto = usuario.getNomeCompleto();
+		this.cpf = usuario.getCpf();
+		this.endereco = usuario.getEndereco();
+		this.username = usuario.getUsername();
+		this.email = usuario.getEmail();
+		this.telefone = usuario.getTelefone();
+		this.idade = usuario.getIdade();
 	}
 
 	public Long getId() {
@@ -89,14 +67,6 @@ public class Usuario {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
 	public String getEmail() {
 		return email;
 	}
@@ -119,6 +89,10 @@ public class Usuario {
 
 	public void setIdade(int idade) {
 		this.idade = idade;
+	}
+
+	public static Page<UsuarioDto> converter(Page<Usuario> usuarios) {
+		return usuarios.map(UsuarioDto::new);
 	}
 
 }
