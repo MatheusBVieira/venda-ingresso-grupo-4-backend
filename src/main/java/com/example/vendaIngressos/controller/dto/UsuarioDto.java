@@ -7,14 +7,14 @@ import com.example.vendaIngressos.model.Usuario;
 
 public class UsuarioDto {
 
-	public Long id;
-	public String nomeCompleto;
-	public String cpf;
-	public Endereco endereco;
-	public String username;
-	public String email;
-	public String telefone;
-	public int idade;
+	private Long id;
+	private String nomeCompleto;
+	private String cpf;
+	private Endereco endereco;
+	private String username;
+	private String email;
+	private String telefone;
+	private int idade;
 
 	public UsuarioDto(Usuario usuario) {
 		this.id = usuario.getId();

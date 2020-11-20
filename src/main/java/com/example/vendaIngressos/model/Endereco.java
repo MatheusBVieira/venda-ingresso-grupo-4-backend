@@ -12,12 +12,12 @@ public class Endereco {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
-	public String rua;
-	public int numero;
-	public String cep;
-	public String bairro;
-	public String complemento;
+	private Long id;
+	private String rua;
+	private int numero;
+	private String cep;
+	private String bairro;
+	private String complemento;
 
 	public String getRua() {
 		return rua;

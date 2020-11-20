@@ -1,21 +1,18 @@
 package com.example.vendaIngressos.model;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "evento")
@@ -23,25 +20,54 @@ public class Evento {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	public Long id;
-	public String nome;
-	public Date data;
-
-	@OneToOne
-	public Usuario criador;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	@ElementCollection
-	@JoinTable(name = "evento_comprador", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-	public List<Usuario> compradores;
-	public Double preco;
-
+	private Long id;
+	private String nome;
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	private Date data;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Usuario criador;
+	private Double preco;
 	@Enumerated(EnumType.STRING)
-	public Categoria categoria;
+	private Categoria categoria;
+	@OneToOne(cascade = CascadeType.ALL)
+	private Endereco endereco;
+	private Integer capacidadePessoas;
 
-	@OneToOne
-	public Endereco endereco;
-	public Integer capacidadePessoas;
+//	@ManyToMany(cascade = CascadeType.ALL)
+//	@ElementCollection
+//	@JoinTable(name = "evento_compradores", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+//	private List<Usuario> compradores;
+
+	public Evento(String nome, Date data, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
+			Integer capacidadePessoas) {
+		this.nome = nome;
+		this.data = data;
+		this.criador = criador;
+		this.preco = preco;
+		this.categoria = categoria;
+		this.endereco = endereco;
+		this.capacidadePessoas = capacidadePessoas;
+	}
+
+	public Evento() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Integer getCapacidadePessoas() {
+		return capacidadePessoas;
+	}
+
+	public void setCapacidadePessoas(Integer capacidadePessoas) {
+		this.capacidadePessoas = capacidadePessoas;
+	}
 
 	public Categoria getCategoria() {
 		return categoria;
@@ -83,13 +109,13 @@ public class Evento {
 		this.criador = criador;
 	}
 
-	public List<Usuario> getCompradores() {
-		return compradores;
-	}
-
-	public void setCompradores(List<Usuario> compradores) {
-		this.compradores = compradores;
-	}
+//	public List<Usuario> getCompradores() {
+//		return compradores;
+//	}
+//
+//	public void setCompradores(List<Usuario> compradores) {
+//		this.compradores = compradores;
+//	}
 
 	public Double getPreco() {
 		return preco;
@@ -97,6 +123,14 @@ public class Evento {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	public void atualizaCapacidade() {
+		System.out.println(capacidadePessoas);
+		double capacidadeNova = capacidadePessoas * 0.4;
+		long capacidadeNovaLong = Math.round(capacidadeNova);
+		this.capacidadePessoas = (int) capacidadeNovaLong;
+
 	}
 
 }

@@ -6,12 +6,12 @@ import com.example.vendaIngressos.repository.UsuarioRepository;
 
 public class AtualizacaoUsuarioForm {
 
-	public String nomeCompleto;
-	public Endereco endereco;
-	public String password;
-	public String email;
-	public String telefone;
-	public int idade;
+	private String nomeCompleto;
+	private Endereco endereco;
+	private String password;
+	private String email;
+	private String telefone;
+	private int idade;
 
 	public String getNomeCompleto() {
 		return nomeCompleto;

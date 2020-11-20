@@ -2,8 +2,6 @@ package com.example.vendaIngressos.service;
 
 import java.util.Optional;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -33,7 +31,7 @@ public class UsuarioService {
 		return usuario;
 	}
 
-	public ResponseEntity<UsuarioDto> atualiza(Long id, @Valid AtualizacaoUsuarioForm form) {
+	public ResponseEntity<UsuarioDto> atualiza(Long id, AtualizacaoUsuarioForm form) {
 		Optional<Usuario> optional = usuarioRepository.findById(id);
 		if (optional.isPresent()) {
 			Usuario usuarioAtualizado = form.atualizar(id, usuarioRepository);
@@ -51,6 +49,10 @@ public class UsuarioService {
 		}
 
 		return ResponseEntity.notFound().build();
+	}
+
+	public Usuario getOne(Long id) {
+		return usuarioRepository.getOne(id);
 	}
 
 }
