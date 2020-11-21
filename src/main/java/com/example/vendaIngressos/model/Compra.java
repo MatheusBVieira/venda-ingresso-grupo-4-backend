@@ -1,11 +1,26 @@
 package com.example.vendaIngressos.model;
 
-//@Entity
+import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+@Entity
 public class Compra {
 
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+
+	@ManyToOne
 	private Usuario usuario;
+
+	@ManyToOne
 	private Evento evento;
-	private int quantidadeDeIngressos;
+	private Date dataDeCompra;
 
 	public Usuario getUsuario() {
 		return usuario;
@@ -23,12 +38,12 @@ public class Compra {
 		this.evento = evento;
 	}
 
-	public int getQuantidadeDeIngressos() {
-		return quantidadeDeIngressos;
+	public Date getDataDeCompra() {
+		return dataDeCompra;
 	}
 
-	public void setQuantidadeDeIngressos(int quantidadeDeIngressos) {
-		this.quantidadeDeIngressos = quantidadeDeIngressos;
+	public void setDataDeCompra(Date dataDeCompra) {
+		this.dataDeCompra = dataDeCompra;
 	}
 
 }
