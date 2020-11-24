@@ -1,51 +1,42 @@
 package com.example.vendaIngressos.controller.form;
 
+import java.util.Date;
+
 import com.example.vendaIngressos.model.Compra;
-import com.example.vendaIngressos.model.Endereco;
+import com.example.vendaIngressos.model.Evento;
+import com.example.vendaIngressos.model.Usuario;
+import com.example.vendaIngressos.service.EventoService;
+import com.example.vendaIngressos.service.UsuarioService;
 
 public class CompraForm {
-	
 
-	public String cartao;
-	public String cpf;
-	public Endereco endereco;
-	public String username;
-	public String password;
-	
-	
-	public String getCartao() {
-		return cartao;
+	private Long idUsuario;
+	private Long idEvento;
+
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
-	public void setCartao(String cartao) {
-		this.cartao = cartao;
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	public String getCpf() {
-		return cpf;
+
+	public Long getIdEvento() {
+		return idEvento;
 	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+
+	public void setIdEvento(Long idEvento) {
+		this.idEvento = idEvento;
 	}
-	public Endereco getEndereco() {
-		return endereco;
+
+	public Compra converter(UsuarioService usuarioService, EventoService eventoService) {
+
+		Usuario usuario = usuarioService.getOne(idUsuario);
+		Evento evento = eventoService.getOne(idEvento);
+
+		Date date = new Date();
+
+		return new Compra(usuario, evento, date);
 	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-	public String getUsername() {
-		return username;
-	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public Compra converter() {
-		return new Compra(cartao, cpf, endereco, username, password);
-	}
-	
+
 }
-

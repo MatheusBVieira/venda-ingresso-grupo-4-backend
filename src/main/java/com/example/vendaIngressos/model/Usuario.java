@@ -18,8 +18,11 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "usuario")
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class Usuario implements UserDetails {
 
 	private static final long serialVersionUID = 1L;

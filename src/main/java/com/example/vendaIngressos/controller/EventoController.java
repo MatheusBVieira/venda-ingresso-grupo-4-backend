@@ -47,7 +47,7 @@ public class EventoController {
 	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, UriComponentsBuilder uriBuilder) {
 		Evento evento = eventoService.insere(form);
 
-		URI uri = uriBuilder.path("/eventi/{id}").buildAndExpand(evento.getId()).toUri();
+		URI uri = uriBuilder.path("/evento/{id}").buildAndExpand(evento.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EventoDto(evento));
 	}
 

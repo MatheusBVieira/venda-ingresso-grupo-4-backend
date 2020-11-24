@@ -22,6 +22,24 @@ public class Compra {
 	private Evento evento;
 	private Date dataDeCompra;
 
+	public Compra(Usuario usuario, Evento evento, Date dataDeCompra) {
+		this.usuario = usuario;
+		this.evento = evento;
+		this.dataDeCompra = dataDeCompra;
+	}
+
+	public Compra() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	public Usuario getUsuario() {
 		return usuario;
 	}

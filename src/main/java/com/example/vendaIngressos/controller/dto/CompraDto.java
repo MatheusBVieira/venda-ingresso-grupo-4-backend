@@ -1,66 +1,51 @@
 package com.example.vendaIngressos.controller.dto;
 
+import java.util.Date;
+
 import org.springframework.data.domain.Page;
 
 import com.example.vendaIngressos.model.Compra;
-import com.example.vendaIngressos.model.Endereco;
-import com.example.vendaIngressos.model.Usuario;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class CompraDto {
 
-	public static Page<CompraDto> converter(Page<Usuario> compras) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
+	private Long idUsuario;
+	private Long idEvento;
+	private Date dataDeCompra;
 
-
-	public String cartao;
-	public String cpf;
-	public Endereco endereco;
-	public String username;
-	public String password;
-	
 	public CompraDto(Compra compra) {
-		this.cartao = compra.getCartao();
-		this.cpf = compra.getCpf();
-		this.endereco = compra.getEndereco();
-		this.username = compra.getUsername();
-		this.password = compra.getPassword();
-		
+		this.idUsuario = compra.getUsuario().getId();
+		this.idEvento = compra.getEvento().getId();
+		this.dataDeCompra = compra.getDataDeCompra();
 	}
-	
-	public String getCartao() {
-		return cartao;
+
+	public Long getIdUsuario() {
+		return idUsuario;
 	}
-	public void setCartao(String cartao) {
-		this.cartao = cartao;
+
+	public void setIdUsuario(Long idUsuario) {
+		this.idUsuario = idUsuario;
 	}
-	public String getCpf() {
-		return cpf;
+
+	public Long getIdEvento() {
+		return idEvento;
 	}
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+
+	public void setIdEvento(Long idEvento) {
+		this.idEvento = idEvento;
 	}
-	public Endereco getEndereco() {
-		return endereco;
+
+	public Date getDataDeCompra() {
+		return dataDeCompra;
 	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+
+	public void setDataDeCompra(Date dataDeCompra) {
+		this.dataDeCompra = dataDeCompra;
 	}
-	public String getUsername() {
-		return username;
+
+	public static Page<CompraDto> converter(Page<Compra> compras) {
+		return compras.map(CompraDto::new);
 	}
-	public void setUsername(String username) {
-		this.username = username;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	
-	
 
 }

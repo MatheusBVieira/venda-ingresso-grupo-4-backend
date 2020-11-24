@@ -56,4 +56,8 @@ public class EventoService {
 		return ResponseEntity.notFound().build();
 	}
 
+	public Evento getOne(Long idEvento) {
+		return eventoRepository.getOne(idEvento);
+	}
+
 }
