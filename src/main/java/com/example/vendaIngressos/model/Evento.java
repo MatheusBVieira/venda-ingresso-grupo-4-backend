@@ -1,7 +1,5 @@
 package com.example.vendaIngressos.model;
 
-import java.util.Date;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -26,11 +24,12 @@ public class Evento {
 	private Long id;
 	private String nome;
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
-	private Date data;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario criador;
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
+	@OneToOne(cascade = CascadeType.ALL)
+	private DataEvento dataEvento;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	private Integer capacidadePessoas;
@@ -43,16 +42,16 @@ public class Evento {
 	// "evento_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
 	// private List<Usuario> compradores;
 
-	public Evento(String nome, Date data, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
-			Integer capacidadePessoas, String descricao) {
+	public Evento(String nome, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
+			DataEvento dataEvento, Integer capacidadePessoas, String descricao) {
 		this.nome = nome;
-		this.data = data;
 		this.criador = criador;
 		this.preco = preco;
 		this.categoria = categoria;
 		this.endereco = endereco;
 		this.capacidadePessoas = capacidadePessoas;
 		this.descricao = descricao;
+		this.dataEvento = dataEvento;
 	}
 
 	public Evento() {
@@ -98,14 +97,6 @@ public class Evento {
 		this.nome = nome;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
 	public Usuario getCriador() {
 		return criador;
 	}
@@ -144,6 +135,14 @@ public class Evento {
 		long capacidadeNovaLong = Math.round(capacidadeNova);
 		this.capacidadePessoas = (int) capacidadeNovaLong;
 
+	}
+
+	public DataEvento getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(DataEvento dataEvento) {
+		this.dataEvento = dataEvento;
 	}
 
 }

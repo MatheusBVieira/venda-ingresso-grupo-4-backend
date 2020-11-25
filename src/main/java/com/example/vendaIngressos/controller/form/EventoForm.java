@@ -1,8 +1,7 @@
 package com.example.vendaIngressos.controller.form;
 
-import java.util.Date;
-
 import com.example.vendaIngressos.model.Categoria;
+import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.model.Usuario;
@@ -13,7 +12,7 @@ public class EventoForm {
 
 	private String nome;
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date data;
+	private DataEvento dataEvento;
 	private Long criador;
 	private Double preco;
 	private Categoria categoria;
@@ -29,12 +28,12 @@ public class EventoForm {
 		this.nome = nome;
 	}
 
-	public Date getData() {
-		return data;
+	public DataEvento getDataEvento() {
+		return dataEvento;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDataEvento(DataEvento dataEvento) {
+		this.dataEvento = dataEvento;
 	}
 
 	public Long getCriador() {
@@ -87,7 +86,7 @@ public class EventoForm {
 
 	public Evento converter(UsuarioService usuarioService) {
 		Usuario usuario = usuarioService.getOne(criador);
-		return new Evento(nome, data, usuario, preco, categoria, endereco, capacidadePessoas, descricao);
+		return new Evento(nome, usuario, preco, categoria, endereco, dataEvento, capacidadePessoas, descricao);
 	}
 
 }

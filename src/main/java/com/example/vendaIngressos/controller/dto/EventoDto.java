@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.domain.Page;
 
 import com.example.vendaIngressos.model.Categoria;
+import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 
@@ -12,7 +13,7 @@ public class EventoDto {
 
 	private Long id;
 	private String nome;
-	private Date data;
+	private DataEvento dataEvento;
 	private long criador;
 	// private List<Usuario> compradores;
 	private Double preco;
@@ -24,7 +25,7 @@ public class EventoDto {
 	public EventoDto(Evento evento) {
 		this.id = evento.getId();
 		this.nome = evento.getNome();
-		this.data = evento.getData();
+		this.dataEvento = evento.getDataEvento();
 		this.criador = evento.getCriador().getId();
 		// this.compradores = evento.getCompradores();
 		this.preco = evento.getPreco();
@@ -48,14 +49,6 @@ public class EventoDto {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	// public List<Usuario> getCompradores() {
@@ -96,6 +89,14 @@ public class EventoDto {
 
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
+	}
+
+	public DataEvento getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(DataEvento dataEvento) {
+		this.dataEvento = dataEvento;
 	}
 
 	public Integer getCapacidadePessoas() {
