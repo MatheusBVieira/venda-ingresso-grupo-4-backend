@@ -16,12 +16,14 @@ import springfox.documentation.spring.web.plugins.Docket;
 
 @Configuration
 public class SwaggerConfigurations {
+
 	@Bean
 	public Docket forumApi() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("com.example.vendaIngressos")).paths(PathSelectors.ant("/**")).build()
-				.ignoredParameterTypes(Usuario.class).globalOperationParameters(
+				.apis(RequestHandlerSelectors.basePackage("com.example.vendaIngressos")).paths(PathSelectors.ant("/**"))
+				.build().ignoredParameterTypes(Usuario.class).globalOperationParameters(
 						Arrays.asList(new ParameterBuilder().name("Authorization").description("Header para token JWT")
 								.modelRef(new ModelRef("string")).parameterType("header").required(false).build()));
 	}
+
 }

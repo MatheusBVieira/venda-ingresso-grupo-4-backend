@@ -26,8 +26,8 @@ public class UsuarioControllerTest {
 	@Test
 	public void deveriaDevolverListaDeUsuario() throws Exception {
 		mockMvc.perform(MockMvcRequestBuilders.get("/usuario").accept(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers
-						.jsonPath("$.content[-1].nomeCompleto").value("Matheus Bruggemann Vieira"));
+				.andExpect(MockMvcResultMatchers.status().isOk())
+				.andExpect(MockMvcResultMatchers.jsonPath("$.content[-1].nome").value("Matheus"));
 	}
 
 	@Test
@@ -47,16 +47,17 @@ public class UsuarioControllerTest {
 
 	@Test
 	public void deveriaDevolverUsuarioAlterado() throws Exception {
-		String json = "{\r\n" + "		\"nomeCompleto\": \"Matheus\",\r\n" + "		\"endereco\": {\r\n"
-				+ "				\"rua\": \"Rua das corticeiras\",\r\n" + "				\"numero\" : 114,\r\n"
-				+ "				\"cep\": \"88063160\",\r\n" + "				\"bairro\": \"Campeche\"\r\n"
-				+ "		},\r\n" + "		\"email\": \"matheus@email.com\",\r\n"
-				+ "		\"telefone\": \"48991466677\",\r\n" + "		\"idade\": 19\r\n" + "}";
+		String json = "{\r\n" + "		\"nome\": \"Matheus\",\r\n" + "		\"sobrenome\":\"Bruggemann Vieira\",\r\n"
+				+ "		\"endereco\": {\r\n" + "				\"rua\": \"Rua das corticeiras\",\r\n"
+				+ "				\"numero\" : 114,\r\n" + "				\"cep\": \"88063160\",\r\n"
+				+ "				\"bairro\": \"Campeche\"\r\n" + "		},\r\n"
+				+ "		\"email\": \"matheus@email.com\",\r\n" + "		\"telefone\": \"48991466677\",\r\n"
+				+ "		\"idade\": 19\r\n" + "}";
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.put("/usuario/{id}", 2).content(json).contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.nomeCompleto").value("Matheus"));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.nome").value("Matheus"));
 	}
 
 }

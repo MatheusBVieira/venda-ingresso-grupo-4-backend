@@ -24,6 +24,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.example.vendaIngressos.controller.dto.UsuarioDto;
 import com.example.vendaIngressos.controller.form.AtualizacaoUsuarioForm;
 import com.example.vendaIngressos.controller.form.UsuarioForm;
+import com.example.vendaIngressos.exception.IdNotFoundException;
 import com.example.vendaIngressos.model.Usuario;
 import com.example.vendaIngressos.service.UsuarioService;
 
@@ -37,13 +38,19 @@ public class UsuarioController {
 	@GetMapping
 	public Page<UsuarioDto> lista(
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-
 		return usuarioService.lista(paginacao);
 	}
 
 	@GetMapping("/{id}")
-	public UsuarioDto getUserById(@PathVariable Long id) {
-		return usuarioService.getUserById(id);
+	public ResponseEntity<UsuarioDto> detalhar(@PathVariable Long id) {
+		try {
+			UsuarioDto usuario = usuarioService.detalhar(id);
+			return ResponseEntity.ok(usuario);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
+
 	}
 
 	@PostMapping
@@ -57,18 +64,26 @@ public class UsuarioController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioForm form) {
+	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id,
+			@RequestBody @Valid AtualizacaoUsuarioForm form) {
 
-		return usuarioService.atualiza(id, form);
+		try {
+			Usuario usuarioAtualizado = usuarioService.atualiza(id, form);
+			return ResponseEntity.ok(new UsuarioDto(usuarioAtualizado));
+		} catch (IdNotFoundException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
 
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
-
-		return usuarioService.deleta(id);
-
+		if (usuarioService.deleta(id)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
 	}
 
 }
