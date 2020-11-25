@@ -29,7 +29,7 @@ public class Compra {
 	}
 
 	public Compra() {
-		// TODO Auto-generated constructor stub
+
 	}
 
 	public Long getId() {

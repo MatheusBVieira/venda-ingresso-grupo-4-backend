@@ -1,7 +1,7 @@
 INSERT INTO USUARIO(nome, sobrenome, cpf, password, email, telefone) VALUES('Matheus', 'Bruggemann Vieira', '01014310903', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'matheusbvieira@hotmail.com', '48991466677');
 INSERT INTO USUARIO(nome, sobrenome, cpf, password, email, telefone) VALUES('Matheus', 'Bruggemann Vieiraa', '01014310904', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'matheusbvieira@hotmal.com', '48991466677');
 
-INSERT INTO `endereco` (`bairro`, `cep`, `complemento`, `numero`, `rua`) VALUES ('Campeche', '88063160', NULL, 114, 'Rua das corticeiras');
+INSERT INTO `endereco` (`nome_local`, `bairro`, `cidade`,`estado`, `cep`, `complemento`, `numero`, `rua`) VALUES ('Local maneiro','Campeche','Florianopolis','SC', '88063160', NULL, 114, 'Rua das corticeiras');
 
 INSERT INTO `data_evento` (`horario_inicio`, `horario_fim`, `data_inicio`, `data_fim`) VALUES ('11:00', '12:00', '2000-11-28 22:00:00.000000', '2000-11-28 22:00:00.000000');
 
