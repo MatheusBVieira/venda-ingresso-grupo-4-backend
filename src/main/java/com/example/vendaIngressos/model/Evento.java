@@ -29,12 +29,13 @@ public class Evento {
 	private Date data;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario criador;
-	private Double preco;
 	@Enumerated(EnumType.STRING)
 	private Categoria categoria;
 	@OneToOne(cascade = CascadeType.ALL)
 	private Endereco endereco;
 	private Integer capacidadePessoas;
+	private Double preco;
+	private String descricao;
 
 	// @ManyToMany(cascade = CascadeType.ALL)
 	// @ElementCollection
@@ -43,7 +44,7 @@ public class Evento {
 	// private List<Usuario> compradores;
 
 	public Evento(String nome, Date data, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
-			Integer capacidadePessoas) {
+			Integer capacidadePessoas, String descricao) {
 		this.nome = nome;
 		this.data = data;
 		this.criador = criador;
@@ -51,10 +52,10 @@ public class Evento {
 		this.categoria = categoria;
 		this.endereco = endereco;
 		this.capacidadePessoas = capacidadePessoas;
+		this.descricao = descricao;
 	}
 
 	public Evento() {
-		// TODO Auto-generated constructor stub
 	}
 
 	public Long getId() {
@@ -127,6 +128,14 @@ public class Evento {
 
 	public void setPreco(Double preco) {
 		this.preco = preco;
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	public void atualizaCapacidade() {

@@ -1,32 +1,30 @@
 package com.example.vendaIngressos.controller.form;
 
-import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Usuario;
 import com.example.vendaIngressos.repository.UsuarioRepository;
 
 public class AtualizacaoUsuarioForm {
 
-	private String nomeCompleto;
-	private Endereco endereco;
+	private String nome;
+	private String sobrenome;
 	private String password;
 	private String email;
 	private String telefone;
-	private int idade;
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getSobrenome() {
+		return sobrenome;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 	public String getPassword() {
@@ -53,23 +51,14 @@ public class AtualizacaoUsuarioForm {
 		this.telefone = telefone;
 	}
 
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-
 	public Usuario atualizar(Long id, UsuarioRepository usuarioRepository) {
 		Usuario usuarioBanco = usuarioRepository.getOne(id);
 
-		usuarioBanco.setNomeCompleto(this.nomeCompleto);
-		usuarioBanco.setEndereco(endereco);
+		usuarioBanco.setNome(nome);
+		usuarioBanco.setSobrenome(sobrenome);
 		usuarioBanco.setPassword(password);
 		usuarioBanco.setEmail(email);
 		usuarioBanco.setTelefone(telefone);
-		usuarioBanco.setIdade(idade);
 
 		return usuarioBanco;
 	}

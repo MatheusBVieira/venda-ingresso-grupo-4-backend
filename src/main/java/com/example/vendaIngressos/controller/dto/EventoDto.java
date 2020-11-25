@@ -19,6 +19,7 @@ public class EventoDto {
 	private Categoria categoria;
 	private Endereco endereco;
 	private Integer capacidadePessoas;
+	private String descricao;
 
 	public EventoDto(Evento evento) {
 		this.id = evento.getId();
@@ -30,6 +31,7 @@ public class EventoDto {
 		this.categoria = evento.getCategoria();
 		this.endereco = evento.getEndereco();
 		this.capacidadePessoas = evento.getCapacidadePessoas();
+		this.descricao = evento.getDescricao();
 	}
 
 	public Long getId() {
@@ -110,6 +112,14 @@ public class EventoDto {
 
 	public static EventoDto converter(Evento evento) {
 		return new EventoDto(evento);
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }

@@ -19,6 +19,7 @@ public class EventoForm {
 	private Categoria categoria;
 	private Endereco endereco;
 	private Integer capacidadePessoas;
+	private String descricao;
 
 	public String getNome() {
 		return nome;
@@ -76,9 +77,17 @@ public class EventoForm {
 		this.capacidadePessoas = capacidadePessoas;
 	}
 
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 	public Evento converter(UsuarioService usuarioService) {
 		Usuario usuario = usuarioService.getOne(criador);
-		return new Evento(nome, data, usuario, preco, categoria, endereco, capacidadePessoas);
+		return new Evento(nome, data, usuario, preco, categoria, endereco, capacidadePessoas, descricao);
 	}
 
 }

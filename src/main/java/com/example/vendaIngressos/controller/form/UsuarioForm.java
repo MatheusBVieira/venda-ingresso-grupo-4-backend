@@ -1,25 +1,30 @@
 package com.example.vendaIngressos.controller.form;
 
-import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Usuario;
 
 public class UsuarioForm {
 
-	public String nomeCompleto;
+	public String nome;
+	public String sobrenome;
 	public String cpf;
-	public Endereco endereco;
-	public String username;
 	public String password;
 	public String email;
 	public String telefone;
-	public int idade;
 
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
 	}
 
 	public String getCpf() {
@@ -30,20 +35,12 @@ public class UsuarioForm {
 		this.cpf = cpf;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public String getPassword() {
@@ -54,14 +51,6 @@ public class UsuarioForm {
 		this.password = password;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public String getTelefone() {
 		return telefone;
 	}
@@ -70,16 +59,8 @@ public class UsuarioForm {
 		this.telefone = telefone;
 	}
 
-	public int getIdade() {
-		return idade;
-	}
-
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-
 	public Usuario converter() {
-		return new Usuario(nomeCompleto, cpf, endereco, username, password, email, telefone, idade);
+		return new Usuario(nome, sobrenome, cpf, password, email, telefone);
 	}
 
 }
