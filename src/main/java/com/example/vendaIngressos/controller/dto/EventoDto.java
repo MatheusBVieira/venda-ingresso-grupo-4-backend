@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.data.domain.Page;
 
 import com.example.vendaIngressos.model.Categoria;
+import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 
@@ -12,24 +13,26 @@ public class EventoDto {
 
 	private Long id;
 	private String nome;
-	private Date data;
+	private DataEvento dataEvento;
 	private long criador;
-//	private List<Usuario> compradores;
+	// private List<Usuario> compradores;
 	private Double preco;
 	private Categoria categoria;
 	private Endereco endereco;
 	private Integer capacidadePessoas;
+	private String descricao;
 
 	public EventoDto(Evento evento) {
 		this.id = evento.getId();
 		this.nome = evento.getNome();
-		this.data = evento.getData();
+		this.dataEvento = evento.getDataEvento();
 		this.criador = evento.getCriador().getId();
-//		this.compradores = evento.getCompradores();
+		// this.compradores = evento.getCompradores();
 		this.preco = evento.getPreco();
 		this.categoria = evento.getCategoria();
 		this.endereco = evento.getEndereco();
 		this.capacidadePessoas = evento.getCapacidadePessoas();
+		this.descricao = evento.getDescricao();
 	}
 
 	public Long getId() {
@@ -48,21 +51,13 @@ public class EventoDto {
 		this.nome = nome;
 	}
 
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
-	}
-
-//	public List<Usuario> getCompradores() {
-//		return compradores;
-//	}
-//
-//	public void setCompradores(List<Usuario> compradores) {
-//		this.compradores = compradores;
-//	}
+	// public List<Usuario> getCompradores() {
+	// return compradores;
+	// }
+	//
+	// public void setCompradores(List<Usuario> compradores) {
+	// this.compradores = compradores;
+	// }
 
 	public long getCriador() {
 		return criador;
@@ -96,6 +91,14 @@ public class EventoDto {
 		this.endereco = endereco;
 	}
 
+	public DataEvento getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(DataEvento dataEvento) {
+		this.dataEvento = dataEvento;
+	}
+
 	public Integer getCapacidadePessoas() {
 		return capacidadePessoas;
 	}
@@ -106,6 +109,18 @@ public class EventoDto {
 
 	public static Page<EventoDto> converter(Page<Evento> eventos) {
 		return eventos.map(EventoDto::new);
+	}
+
+	public static EventoDto converter(Evento evento) {
+		return new EventoDto(evento);
+	}
+
+	public String getDescricao() {
+		return descricao;
+	}
+
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 }

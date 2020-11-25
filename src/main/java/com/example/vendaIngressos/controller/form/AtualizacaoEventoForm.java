@@ -1,8 +1,7 @@
 package com.example.vendaIngressos.controller.form;
 
-import java.util.Date;
-
 import com.example.vendaIngressos.model.Categoria;
+import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.repository.EventoRepository;
@@ -12,7 +11,7 @@ public class AtualizacaoEventoForm {
 
 	private String nome;
 	@JsonFormat(pattern = "dd/MM/yyyy")
-	private Date data;
+	private DataEvento dataEvento;
 	private Double preco;
 	private Categoria categoria;
 	private Endereco endereco;
@@ -23,14 +22,6 @@ public class AtualizacaoEventoForm {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Date getData() {
-		return data;
-	}
-
-	public void setData(Date data) {
-		this.data = data;
 	}
 
 	public Double getPreco() {
@@ -57,11 +48,19 @@ public class AtualizacaoEventoForm {
 		this.endereco = endereco;
 	}
 
+	public DataEvento getDataEvento() {
+		return dataEvento;
+	}
+
+	public void setDataEvento(DataEvento dataEvento) {
+		this.dataEvento = dataEvento;
+	}
+
 	public Evento atualizar(Long id, EventoRepository eventoRepository) {
 		Evento evento = eventoRepository.getOne(id);
 
 		evento.setNome(this.nome);
-		evento.setData(this.data);
+		evento.setDataEvento(this.dataEvento);
 		evento.setPreco(this.preco);
 		evento.setCategoria(this.categoria);
 		evento.setEndereco(endereco);

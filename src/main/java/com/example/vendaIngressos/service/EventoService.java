@@ -56,8 +56,14 @@ public class EventoService {
 		return ResponseEntity.notFound().build();
 	}
 
+	public EventoDto getEventoById(Long idEvento) {
+		Evento evento = eventoRepository.getOne(idEvento);
+		return EventoDto.converter(evento);
+	}
+
 	public Evento getOne(Long idEvento) {
 		return eventoRepository.getOne(idEvento);
+
 	}
 
 }

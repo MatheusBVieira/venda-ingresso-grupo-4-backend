@@ -41,6 +41,11 @@ public class UsuarioController {
 		return usuarioService.lista(paginacao);
 	}
 
+	@GetMapping("/{id}")
+	public UsuarioDto getUserById(@PathVariable Long id) {
+		return usuarioService.getUserById(id);
+	}
+
 	@PostMapping
 	@Transactional
 	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder) {
@@ -52,8 +57,7 @@ public class UsuarioController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id,
-			@RequestBody @Valid AtualizacaoUsuarioForm form) {
+	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioForm form) {
 
 		return usuarioService.atualiza(id, form);
 

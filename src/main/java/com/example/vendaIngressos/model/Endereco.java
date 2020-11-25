@@ -13,20 +13,52 @@ public class Endereco {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String cep;
+	private String nomeLocal;
 	private String rua;
 	private int numero;
-	private String cep;
-	private String bairro;
 	private String complemento;
+	private String bairro;
+	private String cidade;
+	private String estado;
 
-	public Endereco(String rua, int numero, String cep, String bairro) {
+	public Endereco(String nomeLocal, String cep, String rua, int numero, String complemento, String bairro,
+			String cidade, String estado) {
+		this.cep = cep;
+		this.nomeLocal = nomeLocal;
 		this.rua = rua;
 		this.numero = numero;
-		this.cep = cep;
+		this.complemento = complemento;
 		this.bairro = bairro;
+		this.cidade = cidade;
+		this.estado = estado;
 	}
 
 	public Endereco() {
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getCep() {
+		return cep;
+	}
+
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
+
+	public String getNomeLocal() {
+		return nomeLocal;
+	}
+
+	public void setNomeLocal(String nomeLocal) {
+		this.nomeLocal = nomeLocal;
 	}
 
 	public String getRua() {
@@ -45,12 +77,12 @@ public class Endereco {
 		this.numero = numero;
 	}
 
-	public String getCep() {
-		return cep;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	public void setCep(String cep) {
-		this.cep = cep;
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
 	}
 
 	public String getBairro() {
@@ -61,12 +93,20 @@ public class Endereco {
 		this.bairro = bairro;
 	}
 
-	public String getComplemento() {
-		return complemento;
+	public String getCidade() {
+		return cidade;
 	}
 
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public void setEstado(String estado) {
+		this.estado = estado;
 	}
 
 }
