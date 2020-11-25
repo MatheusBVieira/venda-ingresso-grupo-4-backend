@@ -37,9 +37,12 @@ public class EventoController {
 	@GetMapping
 	public Page<EventoDto> lista(
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-
 		return eventoService.lista(paginacao);
+	}
 
+	@GetMapping("/{id}")
+	public EventoDto getEventoById(@PathVariable Long id) {
+		return eventoService.getEventoById(id);
 	}
 
 	@PostMapping

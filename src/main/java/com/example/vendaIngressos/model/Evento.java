@@ -36,10 +36,11 @@ public class Evento {
 	private Endereco endereco;
 	private Integer capacidadePessoas;
 
-//	@ManyToMany(cascade = CascadeType.ALL)
-//	@ElementCollection
-//	@JoinTable(name = "evento_compradores", joinColumns = @JoinColumn(name = "evento_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-//	private List<Usuario> compradores;
+	// @ManyToMany(cascade = CascadeType.ALL)
+	// @ElementCollection
+	// @JoinTable(name = "evento_compradores", joinColumns = @JoinColumn(name =
+	// "evento_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
+	// private List<Usuario> compradores;
 
 	public Evento(String nome, Date data, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
 			Integer capacidadePessoas) {
@@ -112,13 +113,13 @@ public class Evento {
 		this.criador = criador;
 	}
 
-//	public List<Usuario> getCompradores() {
-//		return compradores;
-//	}
-//
-//	public void setCompradores(List<Usuario> compradores) {
-//		this.compradores = compradores;
-//	}
+	// public List<Usuario> getCompradores() {
+	// return compradores;
+	// }
+	//
+	// public void setCompradores(List<Usuario> compradores) {
+	// this.compradores = compradores;
+	// }
 
 	public Double getPreco() {
 		return preco;

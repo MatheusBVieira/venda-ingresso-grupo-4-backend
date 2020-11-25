@@ -78,7 +78,6 @@ public class EventoForm {
 
 	public Evento converter(UsuarioService usuarioService) {
 		Usuario usuario = usuarioService.getOne(criador);
-		System.out.println(usuario.getNomeCompleto());
 		return new Evento(nome, data, usuario, preco, categoria, endereco, capacidadePessoas);
 	}
 

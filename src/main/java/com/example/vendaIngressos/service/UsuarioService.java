@@ -51,6 +51,12 @@ public class UsuarioService {
 		return ResponseEntity.notFound().build();
 	}
 
+	public UsuarioDto getUserById(Long id) {
+		Usuario usuario = usuarioRepository.getOne(id);
+		return UsuarioDto.converter(usuario);
+
+	}
+
 	public Usuario getOne(Long id) {
 		return usuarioRepository.getOne(id);
 	}

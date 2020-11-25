@@ -95,4 +95,8 @@ public class UsuarioDto {
 		return usuarios.map(UsuarioDto::new);
 	}
 
+	public static UsuarioDto converter(Usuario usuario) {
+		return new UsuarioDto(usuario);
+	}
+
 }

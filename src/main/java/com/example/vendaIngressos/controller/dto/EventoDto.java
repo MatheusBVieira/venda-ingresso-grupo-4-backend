@@ -14,7 +14,7 @@ public class EventoDto {
 	private String nome;
 	private Date data;
 	private long criador;
-//	private List<Usuario> compradores;
+	// private List<Usuario> compradores;
 	private Double preco;
 	private Categoria categoria;
 	private Endereco endereco;
@@ -25,7 +25,7 @@ public class EventoDto {
 		this.nome = evento.getNome();
 		this.data = evento.getData();
 		this.criador = evento.getCriador().getId();
-//		this.compradores = evento.getCompradores();
+		// this.compradores = evento.getCompradores();
 		this.preco = evento.getPreco();
 		this.categoria = evento.getCategoria();
 		this.endereco = evento.getEndereco();
@@ -56,13 +56,13 @@ public class EventoDto {
 		this.data = data;
 	}
 
-//	public List<Usuario> getCompradores() {
-//		return compradores;
-//	}
-//
-//	public void setCompradores(List<Usuario> compradores) {
-//		this.compradores = compradores;
-//	}
+	// public List<Usuario> getCompradores() {
+	// return compradores;
+	// }
+	//
+	// public void setCompradores(List<Usuario> compradores) {
+	// this.compradores = compradores;
+	// }
 
 	public long getCriador() {
 		return criador;
@@ -106,6 +106,10 @@ public class EventoDto {
 
 	public static Page<EventoDto> converter(Page<Evento> eventos) {
 		return eventos.map(EventoDto::new);
+	}
+
+	public static EventoDto converter(Evento evento) {
+		return new EventoDto(evento);
 	}
 
 }
