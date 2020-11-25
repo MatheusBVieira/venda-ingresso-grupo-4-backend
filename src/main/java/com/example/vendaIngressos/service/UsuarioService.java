@@ -37,7 +37,7 @@ public class UsuarioService {
 			Usuario usuarioAtualizado = form.atualizar(id, usuarioRepository);
 			return usuarioAtualizado;
 		}
-		throw new IdNotFoundException("Problema na atualização do aluno");
+		throw new IdNotFoundException("Problema na atualização do Usuario");
 	}
 
 	public boolean deleta(Long id) {

@@ -41,8 +41,15 @@ public class EventoController {
 	}
 
 	@GetMapping("/{id}")
-	public EventoDto getEventoById(@PathVariable Long id) {
-		return eventoService.getEventoById(id);
+	public ResponseEntity<EventoDto> detalhar(@PathVariable Long id) {
+		try {
+			EventoDto evento = eventoService.detalhar(id);
+			return ResponseEntity.ok(evento);
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
+
 	}
 
 	@PostMapping
@@ -57,16 +64,23 @@ public class EventoController {
 	@PutMapping("/{id}")
 	@Transactional
 	public ResponseEntity<EventoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoEventoForm form) {
-
-		return eventoService.atualiza(id, form);
+		try {
+			Evento eventoAtualizado = eventoService.atualiza(id, form);
+			return ResponseEntity.ok(new EventoDto(eventoAtualizado));
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
 
 	}
 
 	@DeleteMapping("/{id}")
 	@Transactional
 	public ResponseEntity<?> remover(@PathVariable Long id) {
-
-		return eventoService.deleta(id);
+		if (eventoService.deleta(id)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.notFound().build();
 
 	}
 

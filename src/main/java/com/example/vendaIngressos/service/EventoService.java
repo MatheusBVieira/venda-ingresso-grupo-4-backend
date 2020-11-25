@@ -5,12 +5,12 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.example.vendaIngressos.controller.dto.EventoDto;
 import com.example.vendaIngressos.controller.form.AtualizacaoEventoForm;
 import com.example.vendaIngressos.controller.form.EventoForm;
+import com.example.vendaIngressos.exception.IdNotFoundException;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.repository.EventoRepository;
 
@@ -32,37 +32,35 @@ public class EventoService {
 		Evento evento = form.converter(usuarioService);
 		evento.atualizaCapacidade();
 		eventoRepository.save(evento);
-
 		return evento;
 	}
 
-	public ResponseEntity<EventoDto> atualiza(Long id, AtualizacaoEventoForm form) {
-		Optional<Evento> optional = eventoRepository.findById(id);
+	public Evento atualiza(Long id, AtualizacaoEventoForm form) {
+		Optional<Evento> optional = this.getOne(id);
 		if (optional.isPresent()) {
-			Evento evento = form.atualizar(id, eventoRepository);
-			return ResponseEntity.ok(new EventoDto(evento));
+			Evento eventoAtualizado = form.atualizar(id, eventoRepository);
+			return eventoAtualizado;
 		}
 
-		return ResponseEntity.notFound().build();
+		throw new IdNotFoundException("Problema na atualização do Evento");
 	}
 
-	public ResponseEntity<?> deleta(Long id) {
+	public boolean deleta(Long id) {
 		Optional<Evento> optional = eventoRepository.findById(id);
 		if (optional.isPresent()) {
 			eventoRepository.deleteById(id);
-			return ResponseEntity.ok().build();
+			return true;
 		}
 
-		return ResponseEntity.notFound().build();
+		return false;
 	}
 
-	public EventoDto getEventoById(Long idEvento) {
-		Evento evento = eventoRepository.getOne(idEvento);
-		return EventoDto.converter(evento);
+	public EventoDto detalhar(Long id) {
+		return getOne(id).map(evento -> EventoDto.converter(evento)).orElseThrow(IllegalArgumentException::new);
 	}
 
-	public Evento getOne(Long idEvento) {
-		return eventoRepository.getOne(idEvento);
+	public Optional<Evento> getOne(Long idEvento) {
+		return eventoRepository.findById(idEvento);
 
 	}
 

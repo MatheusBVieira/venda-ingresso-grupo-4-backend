@@ -32,7 +32,7 @@ public class CompraForm {
 	public Compra converter(UsuarioService usuarioService, EventoService eventoService) {
 
 		Usuario usuario = usuarioService.getOne(idUsuario).get();
-		Evento evento = eventoService.getOne(idEvento);
+		Evento evento = eventoService.getOne(idEvento).get();
 
 		Date date = new Date();
 
