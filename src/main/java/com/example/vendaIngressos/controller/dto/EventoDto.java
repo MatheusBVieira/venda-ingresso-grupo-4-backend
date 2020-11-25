@@ -1,7 +1,5 @@
 package com.example.vendaIngressos.controller.dto;
 
-import java.util.Date;
-
 import org.springframework.data.domain.Page;
 
 import com.example.vendaIngressos.model.Categoria;
