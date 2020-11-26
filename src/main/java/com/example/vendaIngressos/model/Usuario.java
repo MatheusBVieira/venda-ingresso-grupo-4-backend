@@ -42,9 +42,10 @@ public class Usuario implements UserDetails {
 
 	public Usuario(String nome, String sobrenome, String cpf, String password, String email, String telefone) {
 		this.nome = nome;
+		this.sobrenome = sobrenome;
 		this.cpf = cpf;
-		this.email = email;
 		this.password = password;
+		this.email = email;
 		this.telefone = telefone;
 	}
 
