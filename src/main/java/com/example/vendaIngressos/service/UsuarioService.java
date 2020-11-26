@@ -3,11 +3,8 @@ package com.example.vendaIngressos.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.example.vendaIngressos.controller.dto.UsuarioDto;
 import com.example.vendaIngressos.controller.form.AtualizacaoUsuarioForm;
 import com.example.vendaIngressos.controller.form.UsuarioForm;
 import com.example.vendaIngressos.exception.IdNotFoundException;
@@ -19,11 +16,6 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
-
-	public Page<UsuarioDto> lista(Pageable paginacao) {
-		Page<Usuario> usuarios = usuarioRepository.findAll(paginacao);
-		return UsuarioDto.converter(usuarios);
-	}
 
 	public Usuario insere(UsuarioForm form) {
 		Usuario usuario = form.converter();
@@ -48,10 +40,6 @@ public class UsuarioService {
 		}
 
 		return false;
-	}
-
-	public UsuarioDto detalhar(Long id) {
-		return getOne(id).map(usuario -> UsuarioDto.converter(usuario)).orElseThrow(IllegalArgumentException::new);
 	}
 
 	public Optional<Usuario> getOne(Long id) {
