@@ -46,18 +46,12 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	// Configuracoes de autorizacao
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
-			.antMatchers(HttpMethod.GET, "/usuario").permitAll()
-				.antMatchers(HttpMethod.POST, "/usuario").permitAll()
-				.antMatchers(HttpMethod.GET, "/usuario/*").permitAll()
-				.antMatchers(HttpMethod.POST, "/usuario/*").permitAll()
-				.antMatchers(HttpMethod.POST, "/auth").permitAll()
-				.antMatchers("/evento").permitAll()
-				.antMatchers("/evento/*").permitAll()
-				.antMatchers("/compra").permitAll()
-				.anyRequest().authenticated().and()
-				.csrf().disable()
-				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+		http.authorizeRequests().antMatchers(HttpMethod.GET, "/usuario").permitAll()
+				.antMatchers(HttpMethod.POST, "/usuario").permitAll().antMatchers(HttpMethod.GET, "/usuario/*").permitAll()
+				.antMatchers(HttpMethod.POST, "/usuario/*").permitAll().antMatchers(HttpMethod.POST, "/auth").permitAll()
+				.antMatchers("/evento").permitAll().antMatchers("/evento/*").permitAll().antMatchers("/compra").permitAll()
+				.anyRequest().authenticated().and().cors().and().csrf().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 	}
@@ -65,12 +59,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	// Configuracoes de recursos estaticos(js, css, imagens, etc.)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/v2/api-docs",
-                "/configuration/ui",
-                "/swagger-resources/**",
-                "/configuration/security",
-                "/swagger-ui.html",
-                "/webjars/**");
+		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security",
+				"/swagger-ui.html", "/webjars/**");
 	}
 
 }
