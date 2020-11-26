@@ -1,6 +1,7 @@
 package com.example.vendaIngressos.model;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -34,13 +35,9 @@ public class Evento {
 	private Endereco endereco;
 	private Integer capacidadePessoas;
 	private Double preco;
-	private String descricao;
 
-	// @ManyToMany(cascade = CascadeType.ALL)
-	// @ElementCollection
-	// @JoinTable(name = "evento_compradores", joinColumns = @JoinColumn(name =
-	// "evento_id"), inverseJoinColumns = @JoinColumn(name = "usuario_id"))
-	// private List<Usuario> compradores;
+	@Column(length = 60000)
+	private String descricao;
 
 	public Evento(String nome, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
 			DataEvento dataEvento, Integer capacidadePessoas, String descricao) {
@@ -105,14 +102,6 @@ public class Evento {
 		this.criador = criador;
 	}
 
-	// public List<Usuario> getCompradores() {
-	// return compradores;
-	// }
-	//
-	// public void setCompradores(List<Usuario> compradores) {
-	// this.compradores = compradores;
-	// }
-
 	public Double getPreco() {
 		return preco;
 	}
@@ -130,7 +119,6 @@ public class Evento {
 	}
 
 	public void atualizaCapacidade() {
-		System.out.println(capacidadePessoas);
 		double capacidadeNova = capacidadePessoas * 0.4;
 		long capacidadeNovaLong = Math.round(capacidadeNova);
 		this.capacidadePessoas = (int) capacidadeNovaLong;

@@ -5,13 +5,12 @@ import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.model.Usuario;
+import com.example.vendaIngressos.service.DataService;
 import com.example.vendaIngressos.service.UsuarioService;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class EventoForm {
 
 	private String nome;
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private DataEvento dataEvento;
 	private Long criador;
 	private Double preco;
@@ -84,9 +83,10 @@ public class EventoForm {
 		this.descricao = descricao;
 	}
 
-	public Evento converter(UsuarioService usuarioService) {
+	public Evento converter(UsuarioService usuarioService, DataService dataService) {
 		Usuario usuario = usuarioService.getOne(criador).get();
-		return new Evento(nome, usuario, preco, categoria, endereco, dataEvento, capacidadePessoas, descricao);
+		DataEvento dataInserida = dataService.insere(dataEvento);
+		return new Evento(nome, usuario, preco, categoria, endereco, dataInserida, capacidadePessoas, descricao);
 	}
 
 }

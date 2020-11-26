@@ -1,6 +1,7 @@
 package com.example.vendaIngressos.model;
 
-import java.util.Date;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,65 +9,44 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "data_evento")
 public class DataEvento {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long id;
-  private String horarioInicio;
-  private String horarioFim;
-  @DateTimeFormat(pattern = "dd/MM/yyyy")
-  private Date dataInicio;
-  @DateTimeFormat(pattern = "dd/MM/yyyy")
-  private Date dataFim;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataHoraInicio;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+	@JsonFormat(pattern = "dd/MM/yyyy HH:mm")
+	private LocalDateTime dataHoraFim;
 
-  public String getHorarioInicio() {
-    return horarioInicio;
-  }
+	public Long getId() {
+		return id;
+	}
 
-  public void setHorarioInicio(String horarioInicio) {
-    this.horarioInicio = horarioInicio;
-  }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-  public String getHorarioFim() {
-    return horarioFim;
-  }
+	public String getDataHoraInicio() {
 
-  public void setHorarioFim(String horarioFim) {
-    this.horarioFim = horarioFim;
-  }
+		return dataHoraInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+	}
 
-  public Date getDataInicio() {
-    return dataInicio;
-  }
+	public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
+		this.dataHoraInicio = dataHoraInicio;
+	}
 
-  public void setDataInicio(Date dataInicio) {
-    this.dataInicio = dataInicio;
-  }
+	public String getDataHoraFim() {
+		return dataHoraFim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+	}
 
-  public Date getDataFim() {
-    return dataFim;
-  }
-
-  public void setDataFim(Date dataFim) {
-    this.dataFim = dataFim;
-  }
-
-  public DataEvento(String horarioInicio, String horarioFim, Date dataInicio, Date dataFim) {
-    this.horarioInicio = horarioInicio;
-    this.horarioFim = horarioFim;
-    this.dataInicio = dataInicio;
-  }
-
-  public DataEvento() {
-  }
+	public void setDataHoraFim(LocalDateTime dataHoraFim) {
+		this.dataHoraFim = dataHoraFim;
+	}
 
 }

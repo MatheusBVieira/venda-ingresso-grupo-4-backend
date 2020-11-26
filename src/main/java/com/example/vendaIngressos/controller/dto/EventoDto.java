@@ -13,7 +13,6 @@ public class EventoDto {
 	private String nome;
 	private DataEvento dataEvento;
 	private long criador;
-	// private List<Usuario> compradores;
 	private Double preco;
 	private Categoria categoria;
 	private Endereco endereco;
@@ -25,7 +24,6 @@ public class EventoDto {
 		this.nome = evento.getNome();
 		this.dataEvento = evento.getDataEvento();
 		this.criador = evento.getCriador().getId();
-		// this.compradores = evento.getCompradores();
 		this.preco = evento.getPreco();
 		this.categoria = evento.getCategoria();
 		this.endereco = evento.getEndereco();
@@ -48,14 +46,6 @@ public class EventoDto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
-	// public List<Usuario> getCompradores() {
-	// return compradores;
-	// }
-	//
-	// public void setCompradores(List<Usuario> compradores) {
-	// this.compradores = compradores;
-	// }
 
 	public long getCriador() {
 		return criador;
