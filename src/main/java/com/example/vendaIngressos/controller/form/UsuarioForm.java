@@ -7,7 +7,7 @@ public class UsuarioForm {
 	public String nome;
 	public String sobrenome;
 	public String cpf;
-	public String password;
+	public String senha;
 	public String email;
 	public String telefone;
 
@@ -43,12 +43,12 @@ public class UsuarioForm {
 		this.email = email;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getTelefone() {
@@ -60,7 +60,7 @@ public class UsuarioForm {
 	}
 
 	public Usuario converter() {
-		return new Usuario(nome, sobrenome, cpf, password, email, telefone);
+		return new Usuario(nome, sobrenome, cpf, senha, email, telefone);
 	}
 
 }

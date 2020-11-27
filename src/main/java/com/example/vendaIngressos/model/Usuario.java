@@ -35,16 +35,16 @@ public class Usuario implements UserDetails {
 	public String cpf;
 	@Column(unique = true)
 	public String email;
-	public String password;
+	public String senha;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Perfil> perfis = new ArrayList<>();
 
-	public Usuario(String nome, String sobrenome, String cpf, String password, String email, String telefone) {
+	public Usuario(String nome, String sobrenome, String cpf, String senha, String email, String telefone) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.cpf = cpf;
-		this.password = password;
+		this.senha = senha;
 		this.email = email;
 		this.telefone = telefone;
 	}
@@ -85,12 +85,12 @@ public class Usuario implements UserDetails {
 		this.cpf = cpf;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getEmail() {
@@ -137,6 +137,11 @@ public class Usuario implements UserDetails {
 	@Override
 	public String getUsername() {
 		return email;
+	}
+
+	@Override
+	public String getPassword() {
+		return senha;
 	}
 
 }
