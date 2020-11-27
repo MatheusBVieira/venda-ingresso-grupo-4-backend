@@ -1,8 +1,8 @@
 package com.example.vendaIngressos.controller;
 
 import java.net.URI;
-import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -38,13 +37,8 @@ public class UsuarioController {
 	private TokenService tokenService;
 
 	@GetMapping
-	public UsuarioDto retornaUsuarioLogado(@RequestHeader Map<String, String> headers) {
-
-		String autorization = headers.get("authorization");
-		Long idUsuario = tokenService.getIdUsuario(autorization);
-		UsuarioDto usuario = new UsuarioDto(usuarioService.getOne(idUsuario).get());
-
-		return usuario;
+	public UsuarioDto retornaUsuarioLogado(HttpServletRequest request) {
+		return new UsuarioDto(usuarioService.getOne(tokenService.getIdUsuario(tokenService.recuperarToken(request))).get());
 	}
 
 	@PostMapping
@@ -58,8 +52,7 @@ public class UsuarioController {
 
 	@PutMapping("/{id}")
 	@Transactional
-	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id,
-			@RequestBody @Valid AtualizacaoUsuarioForm form) {
+	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioForm form) {
 
 		try {
 			Usuario usuarioAtualizado = usuarioService.atualiza(id, form);
