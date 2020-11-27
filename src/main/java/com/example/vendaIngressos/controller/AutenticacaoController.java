@@ -1,5 +1,6 @@
 package com.example.vendaIngressos.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,17 @@ public class AutenticacaoController {
 		} catch (AuthenticationException e) {
 			return ResponseEntity.badRequest().build();
 		}
+	}
+
+	@GetMapping
+	public ResponseEntity<?> verificarAutenticacao(HttpServletRequest request) {
+		String token = tokenService.recuperarToken(request);
+
+		if (tokenService.isTokenValido(token)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.badRequest().build();
+
 	}
 
 }

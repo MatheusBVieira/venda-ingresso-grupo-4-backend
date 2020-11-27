@@ -49,9 +49,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers(HttpMethod.GET, "/usuario").permitAll()
 				.antMatchers(HttpMethod.POST, "/usuario").permitAll().antMatchers(HttpMethod.GET, "/usuario/*").permitAll()
 				.antMatchers(HttpMethod.POST, "/usuario/*").permitAll().antMatchers(HttpMethod.POST, "/auth").permitAll()
-				.antMatchers("/evento").permitAll().antMatchers("/evento/*").permitAll().antMatchers("/compra").permitAll()
-				.anyRequest().authenticated().and().cors().and().csrf().disable().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.antMatchers(HttpMethod.GET, "/auth").permitAll().antMatchers("/evento").permitAll().antMatchers("/evento/*")
+				.permitAll().antMatchers("/compra").permitAll().anyRequest().authenticated().and().cors().and().csrf().disable()
+				.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 	}
