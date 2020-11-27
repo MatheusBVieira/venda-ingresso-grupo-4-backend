@@ -38,21 +38,21 @@ public class UsuarioController {
 
 	@GetMapping
 	public UsuarioDto retornaUsuarioLogado(HttpServletRequest request) {
-		return new UsuarioDto(usuarioService.getOne(tokenService.getIdUsuario(tokenService.recuperarToken(request))).get());
+		return new UsuarioDto(usuarioService.getOne(getIdUsuarioWithToken(request)).get());
 	}
 
 	@PostMapping
 	@Transactional
 	public ResponseEntity<UsuarioDto> cadastrar(@RequestBody @Valid UsuarioForm form, UriComponentsBuilder uriBuilder) {
 		Usuario usuario = usuarioService.insere(form);
-
-		URI uri = uriBuilder.path("/usuario/{id}").buildAndExpand(usuario.getId()).toUri();
-		return ResponseEntity.created(uri).body(new UsuarioDto(usuario));
+		return ResponseEntity.ok(new UsuarioDto(usuario));
 	}
 
-	@PutMapping("/{id}")
+	@PutMapping
 	@Transactional
-	public ResponseEntity<UsuarioDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoUsuarioForm form) {
+	public ResponseEntity<UsuarioDto> atualizar(HttpServletRequest request,
+			@RequestBody @Valid AtualizacaoUsuarioForm form) {
+		Long id = getIdUsuarioWithToken(request);
 
 		try {
 			Usuario usuarioAtualizado = usuarioService.atualiza(id, form);
@@ -64,13 +64,19 @@ public class UsuarioController {
 
 	}
 
-	@DeleteMapping("/{id}")
+	@DeleteMapping
 	@Transactional
-	public ResponseEntity<?> remover(@PathVariable Long id) {
+	public ResponseEntity<?> remover(HttpServletRequest request) {
+		Long id = getIdUsuarioWithToken(request);
+
 		if (usuarioService.deleta(id)) {
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();
+	}
+
+	private Long getIdUsuarioWithToken(HttpServletRequest request) {
+		return tokenService.getIdUsuario(tokenService.recuperarToken(request));
 	}
 
 }

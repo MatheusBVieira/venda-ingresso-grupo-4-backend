@@ -7,7 +7,7 @@ public class AtualizacaoUsuarioForm {
 
 	private String nome;
 	private String sobrenome;
-	private String password;
+	private String senha;
 	private String email;
 	private String telefone;
 
@@ -27,12 +27,12 @@ public class AtualizacaoUsuarioForm {
 		this.sobrenome = sobrenome;
 	}
 
-	public String getPassword() {
-		return password;
+	public String getSenha() {
+		return senha;
 	}
 
-	public void setPassword(String password) {
-		this.password = password;
+	public void setSenha(String senha) {
+		this.senha = senha;
 	}
 
 	public String getEmail() {
@@ -56,7 +56,7 @@ public class AtualizacaoUsuarioForm {
 
 		usuarioBanco.setNome(nome);
 		usuarioBanco.setSobrenome(sobrenome);
-		usuarioBanco.setPassword(password);
+		usuarioBanco.setSenha(senha);
 		usuarioBanco.setEmail(email);
 		usuarioBanco.setTelefone(telefone);
 
