@@ -2,9 +2,12 @@ package com.example.vendaIngressos.service;
 
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.vendaIngressos.config.security.TokenService;
 import com.example.vendaIngressos.controller.form.AtualizacaoUsuarioForm;
 import com.example.vendaIngressos.controller.form.UsuarioForm;
 import com.example.vendaIngressos.exception.IdNotFoundException;
@@ -16,6 +19,9 @@ public class UsuarioService {
 
 	@Autowired
 	private UsuarioRepository usuarioRepository;
+
+	@Autowired
+	private TokenService tokenService;
 
 	public Usuario insere(UsuarioForm form) {
 		Usuario usuario = form.converter();
@@ -38,13 +44,15 @@ public class UsuarioService {
 			usuarioRepository.deleteById(id);
 			return true;
 		}
-
 		return false;
 	}
 
 	public Optional<Usuario> getOne(Long id) {
 		return usuarioRepository.findById(id);
+	}
 
+	public Long getIdUsuarioWithToken(HttpServletRequest request) {
+		return tokenService.getIdUsuario(tokenService.recuperarToken(request));
 	}
 
 }

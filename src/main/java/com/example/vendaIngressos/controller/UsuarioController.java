@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.example.vendaIngressos.config.security.TokenService;
 import com.example.vendaIngressos.controller.dto.UsuarioDto;
 import com.example.vendaIngressos.controller.form.AtualizacaoUsuarioForm;
 import com.example.vendaIngressos.controller.form.UsuarioForm;
@@ -30,12 +29,9 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioService usuarioService;
 
-	@Autowired
-	private TokenService tokenService;
-
 	@GetMapping
 	public UsuarioDto retornaUsuarioLogado(HttpServletRequest request) {
-		return new UsuarioDto(usuarioService.getOne(getIdUsuarioWithToken(request)).get());
+		return new UsuarioDto(usuarioService.getOne(usuarioService.getIdUsuarioWithToken(request)).get());
 	}
 
 	@PostMapping
@@ -49,7 +45,7 @@ public class UsuarioController {
 	@Transactional
 	public ResponseEntity<UsuarioDto> atualizar(HttpServletRequest request,
 			@RequestBody @Valid AtualizacaoUsuarioForm form) {
-		Long id = getIdUsuarioWithToken(request);
+		Long id = usuarioService.getIdUsuarioWithToken(request);
 
 		try {
 			Usuario usuarioAtualizado = usuarioService.atualiza(id, form);
@@ -64,16 +60,12 @@ public class UsuarioController {
 	@DeleteMapping
 	@Transactional
 	public ResponseEntity<?> remover(HttpServletRequest request) {
-		Long id = getIdUsuarioWithToken(request);
+		Long id = usuarioService.getIdUsuarioWithToken(request);
 
 		if (usuarioService.deleta(id)) {
 			return ResponseEntity.ok().build();
 		}
 		return ResponseEntity.notFound().build();
-	}
-
-	private Long getIdUsuarioWithToken(HttpServletRequest request) {
-		return tokenService.getIdUsuario(tokenService.recuperarToken(request));
 	}
 
 }

@@ -5,13 +5,14 @@ import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.repository.EventoRepository;
+import com.example.vendaIngressos.service.CategoriaService;
 
 public class AtualizacaoEventoForm {
 
 	private String nome;
 	private DataEvento dataEvento;
 	private Double preco;
-	private Categoria categoria;
+	private Long categoria;
 	private Endereco endereco;
 
 	public String getNome() {
@@ -30,11 +31,11 @@ public class AtualizacaoEventoForm {
 		this.preco = preco;
 	}
 
-	public Categoria getCategoria() {
+	public Long getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(Long categoria) {
 		this.categoria = categoria;
 	}
 
@@ -54,13 +55,14 @@ public class AtualizacaoEventoForm {
 		this.dataEvento = dataEvento;
 	}
 
-	public Evento atualizar(Long id, EventoRepository eventoRepository) {
+	public Evento atualizar(Long id, EventoRepository eventoRepository, CategoriaService categoriaService) {
 		Evento evento = eventoRepository.getOne(id);
+		Categoria categoria = categoriaService.getOne(this.categoria).get();
 
 		evento.setNome(this.nome);
 		evento.setDataEvento(this.dataEvento);
 		evento.setPreco(this.preco);
-		evento.setCategoria(this.categoria);
+		evento.setCategoria(categoria);
 		evento.setEndereco(endereco);
 
 		return evento;

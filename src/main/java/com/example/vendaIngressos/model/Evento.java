@@ -3,15 +3,11 @@ package com.example.vendaIngressos.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-
-import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,10 +20,9 @@ public class Evento {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String nome;
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	@OneToOne(cascade = CascadeType.ALL)
 	private Usuario criador;
-	@Enumerated(EnumType.STRING)
+	@OneToOne(cascade = CascadeType.ALL)
 	private Categoria categoria;
 	@OneToOne(cascade = CascadeType.ALL)
 	private DataEvento dataEvento;
@@ -122,7 +117,6 @@ public class Evento {
 		double capacidadeNova = capacidadePessoas * 0.4;
 		long capacidadeNovaLong = Math.round(capacidadeNova);
 		this.capacidadePessoas = (int) capacidadeNovaLong;
-
 	}
 
 	public DataEvento getDataEvento() {

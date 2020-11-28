@@ -5,6 +5,7 @@ import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.model.Usuario;
+import com.example.vendaIngressos.service.CategoriaService;
 import com.example.vendaIngressos.service.DataService;
 import com.example.vendaIngressos.service.UsuarioService;
 
@@ -12,9 +13,8 @@ public class EventoForm {
 
 	private String nome;
 	private DataEvento dataEvento;
-	private Long criador;
 	private Double preco;
-	private Categoria categoria;
+	private Long categoria;
 	private Endereco endereco;
 	private Integer capacidadePessoas;
 	private String descricao;
@@ -35,14 +35,6 @@ public class EventoForm {
 		this.dataEvento = dataEvento;
 	}
 
-	public Long getCriador() {
-		return criador;
-	}
-
-	public void setCriador(Long criador) {
-		this.criador = criador;
-	}
-
 	public Double getPreco() {
 		return preco;
 	}
@@ -51,11 +43,11 @@ public class EventoForm {
 		this.preco = preco;
 	}
 
-	public Categoria getCategoria() {
+	public Long getCategoria() {
 		return categoria;
 	}
 
-	public void setCategoria(Categoria categoria) {
+	public void setCategoria(Long categoria) {
 		this.categoria = categoria;
 	}
 
@@ -83,8 +75,10 @@ public class EventoForm {
 		this.descricao = descricao;
 	}
 
-	public Evento converter(UsuarioService usuarioService, DataService dataService) {
+	public Evento converter(Long criador, UsuarioService usuarioService, DataService dataService,
+			CategoriaService categoriaService) {
 		Usuario usuario = usuarioService.getOne(criador).get();
+		Categoria categoria = categoriaService.getOne(this.categoria).get();
 		DataEvento dataInserida = dataService.insere(dataEvento);
 		return new Evento(nome, usuario, preco, categoria, endereco, dataInserida, capacidadePessoas, descricao);
 	}

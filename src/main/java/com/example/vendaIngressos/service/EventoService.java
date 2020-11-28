@@ -26,13 +26,16 @@ public class EventoService {
 	@Autowired
 	private DataService dataService;
 
+	@Autowired
+	private CategoriaService categoriaService;
+
 	public Page<EventoDto> lista(Pageable paginacao) {
 		Page<Evento> eventos = eventoRepository.findAll(paginacao);
 		return EventoDto.converter(eventos);
 	}
 
-	public Evento insere(EventoForm form) {
-		Evento evento = form.converter(usuarioService, dataService);
+	public Evento insere(EventoForm form, Long criador) {
+		Evento evento = form.converter(criador, usuarioService, dataService, categoriaService);
 		evento.atualizaCapacidade();
 		eventoRepository.save(evento);
 		return evento;
@@ -41,7 +44,7 @@ public class EventoService {
 	public Evento atualiza(Long id, AtualizacaoEventoForm form) {
 		Optional<Evento> optional = this.getOne(id);
 		if (optional.isPresent()) {
-			Evento eventoAtualizado = form.atualizar(id, eventoRepository);
+			Evento eventoAtualizado = form.atualizar(id, eventoRepository, categoriaService);
 			return eventoAtualizado;
 		}
 		throw new IdNotFoundException("Problema na atualização do Evento");

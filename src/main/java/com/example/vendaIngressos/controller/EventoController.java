@@ -2,6 +2,7 @@ package com.example.vendaIngressos.controller;
 
 import java.net.URI;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -26,6 +27,7 @@ import com.example.vendaIngressos.controller.form.AtualizacaoEventoForm;
 import com.example.vendaIngressos.controller.form.EventoForm;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.service.EventoService;
+import com.example.vendaIngressos.service.UsuarioService;
 
 @RestController
 @RequestMapping("/evento")
@@ -33,6 +35,9 @@ public class EventoController {
 
 	@Autowired
 	private EventoService eventoService;
+
+	@Autowired
+	private UsuarioService usuaService;
 
 	@GetMapping
 	public Page<EventoDto> lista(
@@ -54,8 +59,11 @@ public class EventoController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, UriComponentsBuilder uriBuilder) {
-		Evento evento = eventoService.insere(form);
+	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, UriComponentsBuilder uriBuilder,
+			HttpServletRequest request) {
+		Evento evento = eventoService.insere(form, usuaService.getIdUsuarioWithToken(request));
+
+		System.out.print(evento);
 
 		URI uri = uriBuilder.path("/evento/{id}").buildAndExpand(evento.getId()).toUri();
 		return ResponseEntity.created(uri).body(new EventoDto(evento));
