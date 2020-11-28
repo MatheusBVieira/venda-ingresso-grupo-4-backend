@@ -1,5 +1,6 @@
 package com.example.vendaIngressos.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.persistence.Entity;
@@ -56,8 +57,8 @@ public class Compra {
 		this.evento = evento;
 	}
 
-	public Date getDataDeCompra() {
-		return dataDeCompra;
+	public String getDataDeCompra() {
+		return new SimpleDateFormat("dd/MM/yyyy").format(dataDeCompra);
 	}
 
 	public void setDataDeCompra(Date dataDeCompra) {

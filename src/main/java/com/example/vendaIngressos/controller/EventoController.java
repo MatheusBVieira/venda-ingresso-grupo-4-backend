@@ -1,7 +1,5 @@
 package com.example.vendaIngressos.controller;
 
-import java.net.URI;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -20,7 +18,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.vendaIngressos.controller.dto.EventoDto;
 import com.example.vendaIngressos.controller.form.AtualizacaoEventoForm;
@@ -37,7 +34,7 @@ public class EventoController {
 	private EventoService eventoService;
 
 	@Autowired
-	private UsuarioService usuaService;
+	private UsuarioService usuarioService;
 
 	@GetMapping
 	public Page<EventoDto> lista(
@@ -54,19 +51,13 @@ public class EventoController {
 			e.printStackTrace();
 			return ResponseEntity.notFound().build();
 		}
-
 	}
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, UriComponentsBuilder uriBuilder,
-			HttpServletRequest request) {
-		Evento evento = eventoService.insere(form, usuaService.getIdUsuarioWithToken(request));
-
-		System.out.print(evento);
-
-		URI uri = uriBuilder.path("/evento/{id}").buildAndExpand(evento.getId()).toUri();
-		return ResponseEntity.created(uri).body(new EventoDto(evento));
+	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, HttpServletRequest request) {
+		Evento evento = eventoService.insere(form, usuarioService.getIdUsuarioWithToken(request));
+		return ResponseEntity.ok(new EventoDto(evento));
 	}
 
 	@PutMapping("/{id}")

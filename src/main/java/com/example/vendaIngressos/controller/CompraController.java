@@ -1,7 +1,6 @@
 package com.example.vendaIngressos.controller;
 
-import java.net.URI;
-
+import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 
@@ -16,12 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.example.vendaIngressos.controller.dto.CompraDto;
 import com.example.vendaIngressos.controller.form.CompraForm;
 import com.example.vendaIngressos.model.Compra;
 import com.example.vendaIngressos.service.CompraService;
+import com.example.vendaIngressos.service.UsuarioService;
 
 @RestController
 @RequestMapping("/compra")
@@ -29,6 +28,9 @@ public class CompraController {
 
 	@Autowired
 	private CompraService compraService;
+
+	@Autowired
+	private UsuarioService usuarioService;
 
 	@GetMapping
 	public Page<CompraDto> lista(
@@ -38,11 +40,9 @@ public class CompraController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<CompraDto> cadastrar(@RequestBody @Valid CompraForm form, UriComponentsBuilder uriBuilder) {
-		Compra compra = compraService.insere(form);
-
-		URI uri = uriBuilder.path("/compra/{id}").buildAndExpand(compra.getId()).toUri();
-		return ResponseEntity.created(uri).body(new CompraDto(compra));
+	public ResponseEntity<CompraDto> cadastrar(@RequestBody @Valid CompraForm form, HttpServletRequest request) {
+		Compra compra = compraService.insere(form, usuarioService.getIdUsuarioWithToken(request));
+		return ResponseEntity.ok(new CompraDto(compra));
 	}
 
 }

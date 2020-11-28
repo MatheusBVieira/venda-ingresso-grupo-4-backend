@@ -27,8 +27,8 @@ public class CompraService {
 		return CompraDto.converter(compras);
 	}
 
-	public Compra insere(CompraForm form) {
-		Compra compra = form.converter(usuarioService, eventoService);
+	public Compra insere(CompraForm form, long comprador) {
+		Compra compra = form.converter(comprador, usuarioService, eventoService);
 
 		compraRepository.save(compra);
 

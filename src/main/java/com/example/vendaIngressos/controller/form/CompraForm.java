@@ -10,16 +10,7 @@ import com.example.vendaIngressos.service.UsuarioService;
 
 public class CompraForm {
 
-	private Long idUsuario;
 	private Long idEvento;
-
-	public Long getIdUsuario() {
-		return idUsuario;
-	}
-
-	public void setIdUsuario(Long idUsuario) {
-		this.idUsuario = idUsuario;
-	}
 
 	public Long getIdEvento() {
 		return idEvento;
@@ -29,11 +20,9 @@ public class CompraForm {
 		this.idEvento = idEvento;
 	}
 
-	public Compra converter(UsuarioService usuarioService, EventoService eventoService) {
-
-		Usuario usuario = usuarioService.getOne(idUsuario).get();
+	public Compra converter(Long comprador, UsuarioService usuarioService, EventoService eventoService) {
+		Usuario usuario = usuarioService.getOne(comprador).get();
 		Evento evento = eventoService.getOne(idEvento).get();
-
 		Date date = new Date();
 
 		return new Compra(usuario, evento, date);

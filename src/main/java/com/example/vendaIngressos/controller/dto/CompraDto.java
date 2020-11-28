@@ -1,7 +1,5 @@
 package com.example.vendaIngressos.controller.dto;
 
-import java.util.Date;
-
 import org.springframework.data.domain.Page;
 
 import com.example.vendaIngressos.model.Compra;
@@ -12,7 +10,7 @@ public class CompraDto {
 
 	private Long idUsuario;
 	private Long idEvento;
-	private Date dataDeCompra;
+	private String dataDeCompra;
 
 	public CompraDto(Compra compra) {
 		this.idUsuario = compra.getUsuario().getId();
@@ -36,11 +34,11 @@ public class CompraDto {
 		this.idEvento = idEvento;
 	}
 
-	public Date getDataDeCompra() {
+	public String getDataDeCompra() {
 		return dataDeCompra;
 	}
 
-	public void setDataDeCompra(Date dataDeCompra) {
+	public void setDataDeCompra(String dataDeCompra) {
 		this.dataDeCompra = dataDeCompra;
 	}
 
