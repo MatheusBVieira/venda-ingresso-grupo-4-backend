@@ -5,12 +5,10 @@ import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
 import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.repository.EventoRepository;
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class AtualizacaoEventoForm {
 
 	private String nome;
-	@JsonFormat(pattern = "dd/MM/yyyy")
 	private DataEvento dataEvento;
 	private Double preco;
 	private Categoria categoria;
