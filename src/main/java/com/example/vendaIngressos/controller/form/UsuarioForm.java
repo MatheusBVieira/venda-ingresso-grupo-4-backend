@@ -2,6 +2,8 @@ package com.example.vendaIngressos.controller.form;
 
 import com.example.vendaIngressos.model.Usuario;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 public class UsuarioForm {
 
 	public String nome;
@@ -60,7 +62,7 @@ public class UsuarioForm {
 	}
 
 	public Usuario converter() {
-		return new Usuario(nome, sobrenome, cpf, senha, email, telefone);
+		return new Usuario(nome, sobrenome, cpf, BCrypt.hashpw(senha, BCrypt.gensalt()), email, telefone);
 	}
 
 }
