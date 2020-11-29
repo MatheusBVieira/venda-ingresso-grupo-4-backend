@@ -3,18 +3,19 @@ package com.example.vendaIngressos.controller.dto;
 import org.springframework.data.domain.Page;
 
 import com.example.vendaIngressos.model.Compra;
+import com.example.vendaIngressos.model.Evento;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class CompraDto {
 
 	private Long idUsuario;
-	private Long idEvento;
+	private EventoDto evento;
 	private String dataDeCompra;
 
 	public CompraDto(Compra compra) {
 		this.idUsuario = compra.getUsuario().getId();
-		this.idEvento = compra.getEvento().getId();
+		this.evento = new EventoDto(compra.getEvento());
 		this.dataDeCompra = compra.getDataDeCompra();
 	}
 
@@ -26,12 +27,12 @@ public class CompraDto {
 		this.idUsuario = idUsuario;
 	}
 
-	public Long getIdEvento() {
-		return idEvento;
+	public EventoDto getEvento() {
+		return evento;
 	}
 
-	public void setIdEvento(Long idEvento) {
-		this.idEvento = idEvento;
+	public void setEvento(Evento evento) {
+		this.evento = new EventoDto(evento);
 	}
 
 	public String getDataDeCompra() {

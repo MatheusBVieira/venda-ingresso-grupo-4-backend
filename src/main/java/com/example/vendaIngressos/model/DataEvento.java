@@ -33,8 +33,7 @@ public class DataEvento {
 	}
 
 	public String getDataHoraInicio() {
-
-		return dataHoraInicio.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+		return dataHoraInicio.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm"));
 	}
 
 	public void setDataHoraInicio(LocalDateTime dataHoraInicio) {
@@ -42,7 +41,7 @@ public class DataEvento {
 	}
 
 	public String getDataHoraFim() {
-		return dataHoraFim.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
+		return dataHoraFim.format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'hh:mm"));
 	}
 
 	public void setDataHoraFim(LocalDateTime dataHoraFim) {
