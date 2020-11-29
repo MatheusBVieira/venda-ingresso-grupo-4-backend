@@ -1,5 +1,5 @@
+INSERT INTO USUARIO(nome, sobrenome, cpf, senha, email, telefone) VALUES('Test', 'Sobrenome', '01014312345', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'test@test.com', '31991345678');
 INSERT INTO USUARIO(nome, sobrenome, cpf, senha, email, telefone) VALUES('Matheus', 'Bruggemann Vieira', '01014310903', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'matheusbvieira@hotmail.com', '48991466677');
-INSERT INTO USUARIO(nome, sobrenome, cpf, senha, email, telefone) VALUES('Test', 'Sobrenome', '01014312345', '$2a$10$RAJQjkcvTe39wSm8lLs/B.izMdO2ncT6tV/L/Y66eCeIUZHFn4zZi', 'test@email.com', '31991345678');
 
 INSERT INTO `endereco` (`nome_local`, `bairro`, `cidade`,`estado`, `cep`, `complemento`, `numero`, `rua`) VALUES ('Local maneiro','Campeche','Florianopolis','SC', '88063160', NULL, 114, 'Rua das corticeiras');
 
