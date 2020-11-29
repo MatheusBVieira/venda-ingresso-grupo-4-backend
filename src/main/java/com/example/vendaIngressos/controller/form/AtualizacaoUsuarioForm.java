@@ -3,6 +3,8 @@ package com.example.vendaIngressos.controller.form;
 import com.example.vendaIngressos.model.Usuario;
 import com.example.vendaIngressos.repository.UsuarioRepository;
 
+import org.springframework.security.crypto.bcrypt.BCrypt;
+
 public class AtualizacaoUsuarioForm {
 
 	private String nome;
@@ -56,7 +58,7 @@ public class AtualizacaoUsuarioForm {
 
 		usuarioBanco.setNome(nome);
 		usuarioBanco.setSobrenome(sobrenome);
-		usuarioBanco.setSenha(senha);
+		usuarioBanco.setSenha(BCrypt.hashpw(senha, BCrypt.gensalt()));
 		usuarioBanco.setEmail(email);
 		usuarioBanco.setTelefone(telefone);
 
