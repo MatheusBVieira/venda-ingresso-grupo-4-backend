@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.vendaIngressos.controller.dto.EventoDto;
@@ -37,9 +38,14 @@ public class EventoController {
 	private UsuarioService usuarioService;
 
 	@GetMapping
-	public Page<EventoDto> lista(
+	public Page<EventoDto> lista(@RequestParam(required = false) String nome,
 			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		return eventoService.lista(paginacao);
+
+		if (nome == null) {
+			return eventoService.lista(paginacao);
+		} else {
+			return eventoService.lista(paginacao, nome);
+		}
 	}
 
 	@GetMapping("/{id}")

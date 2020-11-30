@@ -34,6 +34,11 @@ public class EventoService {
 		return EventoDto.converter(eventos);
 	}
 
+	public Page<EventoDto> lista(Pageable paginacao, String nome) {
+		Page<Evento> eventos = eventoRepository.findByNome(nome, paginacao);
+		return EventoDto.converter(eventos);
+	}
+
 	public Evento insere(EventoForm form, Long criador) {
 		Evento evento = form.converter(criador, usuarioService, dataService, categoriaService);
 		evento.atualizaCapacidade();
