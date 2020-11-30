@@ -1,5 +1,7 @@
 package com.example.vendaIngressos.controller.form;
 
+import java.io.IOException;
+
 import com.example.vendaIngressos.model.Categoria;
 import com.example.vendaIngressos.model.DataEvento;
 import com.example.vendaIngressos.model.Endereco;
@@ -7,7 +9,10 @@ import com.example.vendaIngressos.model.Evento;
 import com.example.vendaIngressos.model.Usuario;
 import com.example.vendaIngressos.service.CategoriaService;
 import com.example.vendaIngressos.service.DataService;
+import com.example.vendaIngressos.service.ImagemService;
 import com.example.vendaIngressos.service.UsuarioService;
+
+import org.springframework.web.multipart.MultipartFile;
 
 public class EventoForm {
 
@@ -18,6 +23,7 @@ public class EventoForm {
 	private Endereco endereco;
 	private Integer capacidadePessoas;
 	private String descricao;
+	private MultipartFile imagem;
 
 	public String getNome() {
 		return nome;
@@ -76,11 +82,23 @@ public class EventoForm {
 	}
 
 	public Evento converter(Long criador, UsuarioService usuarioService, DataService dataService,
-			CategoriaService categoriaService) {
+			CategoriaService categoriaService, ImagemService imagemService) throws IOException {
+
 		Usuario usuario = usuarioService.getOne(criador).get();
 		Categoria categoria = categoriaService.getOne(this.categoria).get();
 		DataEvento dataInserida = dataService.insere(dataEvento);
-		return new Evento(nome, usuario, preco, categoria, endereco, dataInserida, capacidadePessoas, descricao);
+		String imagemName = imagemService.insere(imagem).getName();
+
+		return new Evento(nome, usuario, preco, categoria, endereco, dataInserida, capacidadePessoas, descricao,
+				imagemName);
+	}
+
+	public MultipartFile getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(MultipartFile imagem) {
+		this.imagem = imagem;
 	}
 
 }

@@ -14,6 +14,7 @@ public class AtualizacaoEventoForm {
 	private Double preco;
 	private Long categoria;
 	private Endereco endereco;
+	private String imagem;
 
 	public String getNome() {
 		return nome;
@@ -64,8 +65,17 @@ public class AtualizacaoEventoForm {
 		evento.setPreco(this.preco);
 		evento.setCategoria(categoria);
 		evento.setEndereco(endereco);
+		evento.setImagem(imagem);
 
 		return evento;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 }

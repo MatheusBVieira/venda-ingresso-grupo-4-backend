@@ -1,5 +1,7 @@
 package com.example.vendaIngressos.controller;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -55,7 +57,8 @@ public class EventoController {
 
 	@PostMapping
 	@Transactional
-	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, HttpServletRequest request) {
+	public ResponseEntity<EventoDto> cadastrar(@RequestBody @Valid EventoForm form, HttpServletRequest request)
+			throws IOException {
 		Evento evento = eventoService.insere(form, usuarioService.getIdUsuarioWithToken(request));
 		return ResponseEntity.ok(new EventoDto(evento));
 	}

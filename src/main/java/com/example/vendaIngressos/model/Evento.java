@@ -30,12 +30,12 @@ public class Evento {
 	private Endereco endereco;
 	private Integer capacidadePessoas;
 	private Double preco;
-
+	private String imagem;
 	@Column(length = 60000)
 	private String descricao;
 
 	public Evento(String nome, Usuario criador, Double preco, Categoria categoria, Endereco endereco,
-			DataEvento dataEvento, Integer capacidadePessoas, String descricao) {
+			DataEvento dataEvento, Integer capacidadePessoas, String descricao, String imagem) {
 		this.nome = nome;
 		this.criador = criador;
 		this.preco = preco;
@@ -44,6 +44,7 @@ public class Evento {
 		this.capacidadePessoas = capacidadePessoas;
 		this.descricao = descricao;
 		this.dataEvento = dataEvento;
+		this.imagem = imagem;
 	}
 
 	public Evento() {
@@ -125,6 +126,14 @@ public class Evento {
 
 	public void setDataEvento(DataEvento dataEvento) {
 		this.dataEvento = dataEvento;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 }

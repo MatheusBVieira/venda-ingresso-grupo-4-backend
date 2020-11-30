@@ -18,6 +18,7 @@ public class EventoDto {
 	private Endereco endereco;
 	private Integer capacidadePessoas;
 	private String descricao;
+	private String imagem;
 
 	public EventoDto(Evento evento) {
 		this.id = evento.getId();
@@ -29,6 +30,7 @@ public class EventoDto {
 		this.endereco = evento.getEndereco();
 		this.capacidadePessoas = evento.getCapacidadePessoas();
 		this.descricao = evento.getDescricao();
+		this.imagem = evento.getImagem();
 	}
 
 	public Long getId() {
@@ -109,6 +111,14 @@ public class EventoDto {
 
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
+	}
+
+	public String getImagem() {
+		return imagem;
+	}
+
+	public void setImagem(String imagem) {
+		this.imagem = imagem;
 	}
 
 }

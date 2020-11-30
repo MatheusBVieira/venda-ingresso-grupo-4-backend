@@ -48,8 +48,9 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/usuario").permitAll().antMatchers("/auth").permitAll()
 				.antMatchers("/categoria").permitAll().antMatchers(HttpMethod.GET, "/evento").permitAll()
-				.antMatchers(HttpMethod.GET, "/evento/**").permitAll().anyRequest().authenticated().and().cors().and().csrf()
-				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.antMatchers(HttpMethod.GET, "/image").permitAll().antMatchers(HttpMethod.GET, "/evento/**").permitAll()
+				.anyRequest().authenticated().and().cors().and().csrf().disable().sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 	}

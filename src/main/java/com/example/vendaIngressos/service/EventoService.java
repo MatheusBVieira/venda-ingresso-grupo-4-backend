@@ -1,5 +1,6 @@
 package com.example.vendaIngressos.service;
 
+import java.io.IOException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +30,16 @@ public class EventoService {
 	@Autowired
 	private CategoriaService categoriaService;
 
+	@Autowired
+	private ImagemService imagemService;
+
 	public Page<EventoDto> lista(Pageable paginacao) {
 		Page<Evento> eventos = eventoRepository.findAll(paginacao);
 		return EventoDto.converter(eventos);
 	}
 
-	public Evento insere(EventoForm form, Long criador) {
-		Evento evento = form.converter(criador, usuarioService, dataService, categoriaService);
+	public Evento insere(EventoForm form, Long criador) throws IOException {
+		Evento evento = form.converter(criador, usuarioService, dataService, categoriaService, imagemService);
 		evento.atualizaCapacidade();
 		eventoRepository.save(evento);
 		return evento;
