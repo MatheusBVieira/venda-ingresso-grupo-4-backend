@@ -22,16 +22,15 @@ public class CompraService {
 	@Autowired
 	private EventoService eventoService;
 
-	public Page<CompraDto> lista(Pageable paginacao) {
-		Page<Compra> compras = compraRepository.findAll(paginacao);
+	public Page<CompraDto> lista(Pageable paginacao, Long id) {
+		Page<Compra> compras = compraRepository.findByUsuarioId(id, paginacao);
+
 		return CompraDto.converter(compras);
 	}
 
 	public Compra insere(CompraForm form, long comprador) {
 		Compra compra = form.converter(comprador, usuarioService, eventoService);
-
 		compraRepository.save(compra);
-
 		return compra;
 	}
 

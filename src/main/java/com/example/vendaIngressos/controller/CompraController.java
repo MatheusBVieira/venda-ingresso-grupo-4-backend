@@ -33,9 +33,10 @@ public class CompraController {
 	private UsuarioService usuarioService;
 
 	@GetMapping
-	public Page<CompraDto> lista(
+	public Page<CompraDto> lista(HttpServletRequest request,
 			@PageableDefault(sort = "dataDeCompra", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
-		return compraService.lista(paginacao);
+
+		return compraService.lista(paginacao, usuarioService.getIdUsuarioWithToken(request));
 	}
 
 	@PostMapping
