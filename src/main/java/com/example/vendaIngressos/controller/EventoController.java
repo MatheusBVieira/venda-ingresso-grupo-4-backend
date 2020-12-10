@@ -48,6 +48,14 @@ public class EventoController {
 		}
 	}
 
+	@RequestMapping("/criador")
+	@GetMapping
+	public Page<EventoDto> listaEventoUsuario(HttpServletRequest request,
+			@PageableDefault(sort = "id", direction = Direction.DESC, page = 0, size = 10) Pageable paginacao) {
+
+		return eventoService.lista(paginacao, usuarioService.getIdUsuarioWithToken(request));
+	}
+
 	@GetMapping("/{id}")
 	public ResponseEntity<EventoDto> detalhar(@PathVariable Long id) {
 		try {
