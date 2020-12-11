@@ -27,11 +27,11 @@ public class CompraDto {
 		this.idUsuario = idUsuario;
 	}
 
-	public Evento getIdEvento() {
+	public Evento getEvento() {
 		return evento;
 	}
 
-	public void setIdEvento(Evento idEvento) {
+	public void setEvento(Evento idEvento) {
 		this.evento = idEvento;
 	}
 
