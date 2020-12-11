@@ -19,7 +19,7 @@ import com.example.vendaIngressos.repository.UsuarioRepository;
 
 @EnableWebSecurity
 @Configuration
-@Profile("dev")
+@Profile({ "dev", "prod" })
 public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -48,8 +48,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests().antMatchers(HttpMethod.POST, "/usuario").permitAll().antMatchers("/auth").permitAll()
 				.antMatchers("/categoria").permitAll().antMatchers(HttpMethod.GET, "/evento").permitAll()
-				.antMatchers(HttpMethod.GET, "/evento/**").permitAll().anyRequest().authenticated().and().cors().and().csrf()
-				.disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
+				.antMatchers(HttpMethod.GET, "/evento/**").permitAll().anyRequest().authenticated().and().cors().and()
+				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 				.addFilterBefore(new AutenticacaoViaTokenFilter(tokenService, usuarioRepository),
 						UsernamePasswordAuthenticationFilter.class);
 	}
@@ -57,8 +57,8 @@ public class SecurityConfigurations extends WebSecurityConfigurerAdapter {
 	// Configuracoes de recursos estaticos(js, css, imagens, etc.)
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**", "/configuration/security",
-				"/swagger-ui.html", "/webjars/**");
+		web.ignoring().antMatchers("/v2/api-docs", "/configuration/ui", "/swagger-resources/**",
+				"/configuration/security", "/swagger-ui.html", "/webjars/**");
 	}
 
 }
