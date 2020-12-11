@@ -23,7 +23,7 @@ import com.example.vendaIngressos.controller.form.LoginForm;
 
 @RestController
 @RequestMapping("/auth")
-@Profile("dev")
+@Profile({ "dev", "prod" })
 public class AutenticacaoController {
 
 	@Autowired
