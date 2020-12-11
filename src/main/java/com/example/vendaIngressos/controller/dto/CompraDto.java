@@ -10,12 +10,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class CompraDto {
 
 	private Long idUsuario;
-	private Evento idEvento;
+	private Evento Evento;
 	private String dataDeCompra;
 
 	public CompraDto(Compra compra) {
 		this.idUsuario = compra.getUsuario().getId();
-		this.idEvento = compra.getEvento();
+		this.Evento = compra.getEvento();
 		this.dataDeCompra = compra.getDataDeCompra();
 	}
 
@@ -28,11 +28,11 @@ public class CompraDto {
 	}
 
 	public Evento getIdEvento() {
-		return idEvento;
+		return Evento;
 	}
 
 	public void setIdEvento(Evento idEvento) {
-		this.idEvento = idEvento;
+		this.Evento = idEvento;
 	}
 
 	public String getDataDeCompra() {
